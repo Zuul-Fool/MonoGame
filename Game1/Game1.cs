@@ -32,7 +32,7 @@ namespace Game1
         {
             // TODO: Add your initialization logic here
             ballPos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
-            ballSpeed = 100f;
+            ballSpeed = 500f;
 
             base.Initialize();
         }
