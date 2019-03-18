@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Game1
 {
@@ -82,6 +83,9 @@ namespace Game1
 
             if (kstate.IsKeyDown(Keys.Right))
                 ballPos.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            ballPos.X = Math.Min(Math.Max(textureBall.Width / 2, ballPos.X), graphics.PreferredBackBufferWidth - textureBall.Width / 2);
+            ballPos.Y = Math.Min(Math.Max(textureBall.Height / 2, ballPos.Y), graphics.PreferredBackBufferHeight - textureBall.Height / 2);
 
             base.Update(gameTime);
         }
