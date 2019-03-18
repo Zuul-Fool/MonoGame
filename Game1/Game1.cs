@@ -47,7 +47,7 @@ namespace Game1
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            textureBall = Content.Load<Texture2D>("ball");
+            textureBall = Content.Load<Texture2D>("eetuface");
         }
 
         /// <summary>
