@@ -93,7 +93,7 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.MediumPurple);
-
+            // Hehe kyrpä
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(textureBall, ballPos, Color.White);
