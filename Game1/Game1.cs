@@ -100,7 +100,7 @@ namespace Game1
             // Hehe kyrpä
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(textureBall, ballPos, Color.White);
+            spriteBatch.Draw(textureBall, ballPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
             spriteBatch.End();
             base.Draw(gameTime);
         }
