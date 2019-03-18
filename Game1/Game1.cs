@@ -12,6 +12,8 @@ namespace Game1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D textureBall;
+        Vector2 ballPos;
+        float ballSpeed;
 
         public Game1()
         {
@@ -28,6 +30,8 @@ namespace Game1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            ballPos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+            ballSpeed = 100f;
 
             base.Initialize();
         }
@@ -65,6 +69,19 @@ namespace Game1
                 Exit();
 
             // TODO: Add your update logic here
+            var kstate = Keyboard.GetState();
+
+            if (kstate.IsKeyDown(Keys.Up))
+                ballPos.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (kstate.IsKeyDown(Keys.Down))
+                ballPos.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (kstate.IsKeyDown(Keys.Left))
+                ballPos.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (kstate.IsKeyDown(Keys.Right))
+                ballPos.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             base.Update(gameTime);
         }
@@ -79,7 +96,7 @@ namespace Game1
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(textureBall, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(textureBall, ballPos, Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
