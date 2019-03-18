@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Game1.Content
 {
-    class Class1
+    class Core
     {
+
     }
 }
