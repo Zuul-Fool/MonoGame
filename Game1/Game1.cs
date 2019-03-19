@@ -103,6 +103,7 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.MediumPurple);
             // TODO: Add your drawing code here
+            // hehe kyrpä
             spriteBatch.Begin();
             spriteBatch.Draw(bg, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
             spriteBatch.Draw(textureBall, eetuPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
