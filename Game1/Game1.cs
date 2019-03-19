@@ -14,8 +14,8 @@ namespace Game1
         SpriteBatch spriteBatch;
         Texture2D textureBall;
         Texture2D bg;
-        Vector2 ballPos;
-        float ballSpeed;
+        Vector2 eetuPos;
+        float eetuSpeed;
 
         public Game1()
         {
@@ -35,8 +35,8 @@ namespace Game1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            ballPos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
-            ballSpeed = 500f;
+            eetuPos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+            eetuSpeed = 500f;
 
             base.Initialize();
         }
@@ -78,19 +78,19 @@ namespace Game1
             var kstate = Keyboard.GetState();
 
             if (kstate.IsKeyDown(Keys.W))
-                ballPos.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eetuPos.Y -= eetuSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (kstate.IsKeyDown(Keys.S))
-                ballPos.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eetuPos.Y += eetuSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (kstate.IsKeyDown(Keys.A))
-                ballPos.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eetuPos.X -= eetuSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (kstate.IsKeyDown(Keys.D))
-                ballPos.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                eetuPos.X += eetuSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            ballPos.X = Math.Min(Math.Max(textureBall.Width / 2, ballPos.X), graphics.PreferredBackBufferWidth - textureBall.Width / 2);
-            ballPos.Y = Math.Min(Math.Max(textureBall.Height / 2, ballPos.Y), graphics.PreferredBackBufferHeight - textureBall.Height / 2);
+            eetuPos.X = Math.Min(Math.Max(textureBall.Width / 2, eetuPos.X), graphics.PreferredBackBufferWidth - textureBall.Width / 2);
+            eetuPos.Y = Math.Min(Math.Max(textureBall.Height / 2, eetuPos.Y), graphics.PreferredBackBufferHeight - textureBall.Height / 2);
 
             base.Update(gameTime);
         }
@@ -105,7 +105,7 @@ namespace Game1
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(bg, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
-            spriteBatch.Draw(textureBall, ballPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
+            spriteBatch.Draw(textureBall, eetuPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
             spriteBatch.End();
             base.Draw(gameTime);
         }
