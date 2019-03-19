@@ -32,17 +32,17 @@ namespace Game1.GameStates
 
         public override void LoadContent(ContentManager content)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void UnloadContent()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
