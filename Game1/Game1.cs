@@ -16,6 +16,8 @@ namespace Game1
         Texture2D bg;
         Vector2 eetuPos;
         float eetuSpeed;
+        SpriteFont font;
+        int Score = 0;
 
         public Game1()
         {
@@ -37,6 +39,7 @@ namespace Game1
             // TODO: Add your initialization logic here
             eetuPos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
             eetuSpeed = 500f;
+            font = Content.Load<SpriteFont>("Score");
 
             base.Initialize();
         }
@@ -92,6 +95,9 @@ namespace Game1
             eetuPos.X = Math.Min(Math.Max(textureBall.Width / 2, eetuPos.X), graphics.PreferredBackBufferWidth - textureBall.Width / 2);
             eetuPos.Y = Math.Min(Math.Max(textureBall.Height / 2, eetuPos.Y), graphics.PreferredBackBufferHeight - textureBall.Height / 2);
 
+            if (kstate.IsKeyDown(Keys.G))
+                Score++;
+
             base.Update(gameTime);
         }
 
@@ -107,6 +113,7 @@ namespace Game1
             spriteBatch.Begin();
             spriteBatch.Draw(bg, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
             spriteBatch.Draw(textureBall, eetuPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, "Score: "+ Score, new Vector2(100, 100), Color.HotPink);
             spriteBatch.End();
             base.Draw(gameTime);
         }
