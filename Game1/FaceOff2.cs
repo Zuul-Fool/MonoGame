@@ -9,7 +9,7 @@ namespace Game1
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class FaceOff2 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -20,7 +20,7 @@ namespace Game1
         SpriteFont font;
         int Score = 0;
 
-        public Game1()
+        public FaceOff2()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
