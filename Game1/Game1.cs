@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Game1.GameStates;
 
 namespace Game1
 {
@@ -52,7 +53,8 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            GameStateManager.Instance.SetContent(Content);
+            GameStateManager.Instance.AddScreen(new MainGameState(GraphicsDevice));
             // TODO: use this.Content to load your game content here
             textureBall = Content.Load<Texture2D>("eetuface");
             bg = Content.Load<Texture2D>("bg");
@@ -64,6 +66,7 @@ namespace Game1
         /// </summary>
         protected override void UnloadContent()
         {
+            GameStateManager.Instance.UnloadContent();
             // TODO: Unload any non ContentManager content here
         }
 
@@ -74,6 +77,8 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            GameStateManager.Instance.Update(gameTime);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -109,7 +114,7 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.MediumPurple);
             // TODO: Add your drawing code here
-            // hehe kyrpä
+            GameStateManager.Instance.Draw(spriteBatch);
             spriteBatch.Begin();
             spriteBatch.Draw(bg, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
             spriteBatch.Draw(textureBall, eetuPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
