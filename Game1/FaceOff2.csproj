@@ -57,10 +57,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FaceOff2.cs" />
-    <Compile Include="GameStates\GameState.cs" />
-    <Compile Include="GameStates\GameStateManager.cs" />
-    <Compile Include="GameStates\IGameState.cs" />
-    <Compile Include="GameStates\MainGameState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

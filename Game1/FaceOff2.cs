@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using Game1.GameStates;
 
 namespace Game1
 {
@@ -19,6 +18,15 @@ namespace Game1
         float eetuSpeed;
         SpriteFont font;
         int Score = 0;
+
+        enum GameState
+        {
+            MainMenu,
+            Gameplay,
+            Defeat,
+        }
+
+        private GameState _state;
 
         public FaceOff2()
         {
@@ -41,7 +49,6 @@ namespace Game1
             eetuPos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
             eetuSpeed = 500f;
             font = Content.Load<SpriteFont>("Score");
-
             base.Initialize();
         }
 
@@ -53,8 +60,6 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            GameStateManager.Instance.SetContent(Content);
-            GameStateManager.Instance.AddScreen(new MainGameState(GraphicsDevice));
             // TODO: use this.Content to load your game content here
             textureBall = Content.Load<Texture2D>("eetuface");
             bg = Content.Load<Texture2D>("bg");
@@ -66,7 +71,6 @@ namespace Game1
         /// </summary>
         protected override void UnloadContent()
         {
-            GameStateManager.Instance.UnloadContent();
             // TODO: Unload any non ContentManager content here
         }
 
@@ -77,12 +81,36 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            GameStateManager.Instance.Update(gameTime);
+            switch (_state)
+            {
+                case GameState.MainMenu:
+                    UpdateMainMenu(gameTime);
+                    break;
+                case GameState.Gameplay:
+                    UpdateGameplay(gameTime);
+                    break;
+                case GameState.Defeat:
+                    UpdateDefeat(gameTime);
+                    break;
+            }
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
+            base.Update(gameTime);
+        }
+
+        protected void UpdateMainMenu(GameTime gameTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                _state = GameState.Gameplay;
+            }
+        }
+
+        protected void UpdateGameplay(GameTime gameTime)
+        {
             var kstate = Keyboard.GetState();
 
             if (kstate.IsKeyDown(Keys.W))
@@ -102,8 +130,11 @@ namespace Game1
 
             if (kstate.IsKeyDown(Keys.G))
                 Score++;
+        }
 
-            base.Update(gameTime);
+        protected void UpdateDefeat(GameTime gameTime)
+        {
+
         }
 
         /// <summary>
@@ -112,15 +143,41 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.MediumPurple);
+            GraphicsDevice.Clear(Color.Black);
+            switch (_state)
+            {
+                case GameState.MainMenu:
+                    DrawMainMenu(gameTime);
+                    break;
+                case GameState.Gameplay:
+                    DrawGameplay(gameTime);
+                    break;
+                case GameState.Defeat:
+                    DrawDefeat(gameTime);
+                    break;
+            }
+
             // TODO: Add your drawing code here
-            GameStateManager.Instance.Draw(spriteBatch);
+            base.Draw(gameTime);
+        }
+
+        protected void DrawMainMenu(GameTime gameTime)
+        {
+            spriteBatch.Begin();
+            spriteBatch.DrawString(font, "Welcome to Face Off 2: Electric Boogaloo: ", new Vector2(100, 100), Color.DeepPink);
+            spriteBatch.End();
+        }
+        protected void DrawGameplay(GameTime gameTime)
+        {
             spriteBatch.Begin();
             spriteBatch.Draw(bg, new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight), Color.White);
             spriteBatch.Draw(textureBall, eetuPos, null, Color.White, 0f, new Vector2(textureBall.Width / 2, textureBall.Height / 2), Vector2.One, SpriteEffects.None, 0f);
-            spriteBatch.DrawString(font, "Score: "+ Score, new Vector2(100, 100), Color.HotPink);
+            spriteBatch.DrawString(font, "Score: " + Score, new Vector2(100, 100), Color.HotPink);
             spriteBatch.End();
-            base.Draw(gameTime);
+        }
+        protected void DrawDefeat(GameTime gameTime)
+        {
+
         }
     }
 }
