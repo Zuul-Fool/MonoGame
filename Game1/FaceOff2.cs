@@ -130,6 +130,10 @@ namespace Game1
 
             if (kstate.IsKeyDown(Keys.G))
                 Score++;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.F))
+                _state = GameState.Defeat;
+            
         }
 
         protected void UpdateDefeat(GameTime gameTime)
