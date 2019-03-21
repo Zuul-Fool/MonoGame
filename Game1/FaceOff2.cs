@@ -12,6 +12,7 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D defeat;
         Texture2D textureBall;
         Texture2D bg;
         Vector2 eetuPos;
@@ -61,6 +62,7 @@ namespace Game1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
+            defeat = Content.Load<Texture2D>("eetufaceDed");
             textureBall = Content.Load<Texture2D>("eetuface");
             bg = Content.Load<Texture2D>("bg");
         }
@@ -183,6 +185,7 @@ namespace Game1
         {
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "You Died", new Vector2(100, 100), Color.Red);
+            spriteBatch.Draw(defeat, new Rectangle(250, 100, 100, 125), Color.White);
             spriteBatch.End();
         }
     }
