@@ -181,7 +181,9 @@ namespace Game1
         }
         protected void DrawDefeat(GameTime gameTime)
         {
-
+            spriteBatch.Begin();
+            spriteBatch.DrawString(font, "You Died", new Vector2(100, 100), Color.Red);
+            spriteBatch.End();
         }
     }
 }
