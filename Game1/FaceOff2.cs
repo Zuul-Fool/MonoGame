@@ -171,6 +171,8 @@ namespace Game1
         {
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "Welcome to Face Off 2: Electric Boogaloo: ", new Vector2(100, 100), Color.DeepPink);
+            spriteBatch.DrawString(font, "Press enter to start", new Vector2(100, 150), Color.DeepPink);
+            spriteBatch.DrawString(font, "WASD to move, ESC to exit game", new Vector2(100, 200), Color.DeepPink);
             spriteBatch.End();
         }
         protected void DrawGameplay(GameTime gameTime)
