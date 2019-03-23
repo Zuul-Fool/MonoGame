@@ -187,6 +187,7 @@ namespace Game1
         {
             spriteBatch.Begin();
             spriteBatch.DrawString(font, "You Died", new Vector2(100, 100), Color.Red);
+            spriteBatch.DrawString(font, "Press ESC to exit", new Vector2(100, 400), Color.Red);
             spriteBatch.Draw(defeat, new Rectangle(250, 100, 100, 125), Color.White);
             spriteBatch.End();
         }
