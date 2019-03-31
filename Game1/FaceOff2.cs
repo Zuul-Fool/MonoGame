@@ -10,6 +10,7 @@ namespace Game1
     /// </summary>
     public class FaceOff2 : Game
     {
+        KeyboardState oldState;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D defeat;
@@ -83,6 +84,8 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
+
             switch (_state)
             {
                 case GameState.MainMenu:
@@ -96,19 +99,25 @@ namespace Game1
                     break;
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
 
         protected void UpdateMainMenu(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            KeyboardState newState = Keyboard.GetState();
+
+            if (oldState.IsKeyUp(Keys.Escape) && newState.IsKeyDown(Keys.Escape))
+            {
+                Exit();
+            }
+
+            if (oldState.IsKeyUp(Keys.Enter) && newState.IsKeyDown(Keys.Enter))
             {
                 _state = GameState.Gameplay;
             }
+
+            oldState = newState;
         }
 
         protected void UpdateGameplay(GameTime gameTime)
@@ -130,17 +139,26 @@ namespace Game1
             eetuPos.X = Math.Min(Math.Max(textureBall.Width / 2, eetuPos.X), graphics.PreferredBackBufferWidth - textureBall.Width / 2);
             eetuPos.Y = Math.Min(Math.Max(textureBall.Height / 2, eetuPos.Y), graphics.PreferredBackBufferHeight - textureBall.Height / 2);
 
-            if (kstate.IsKeyDown(Keys.G))
+            if (oldState.IsKeyUp(Keys.G) && kstate.IsKeyDown(Keys.G))
+            {
                 Score++;
+            }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.F))
+            if (oldState.IsKeyUp(Keys.F) && kstate.IsKeyDown(Keys.F))
+            {
                 _state = GameState.Defeat;
-            
+            }
         }
 
         protected void UpdateDefeat(GameTime gameTime)
         {
+            KeyboardState newState = Keyboard.GetState();
 
+            if (oldState.IsKeyUp(Keys.Escape) && newState.IsKeyDown(Keys.Escape))
+            {
+                _state = GameState.MainMenu;
+            }
+            oldState = newState;
         }
 
         /// <summary>
